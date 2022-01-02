@@ -65,7 +65,7 @@ public class MicStreamPlugin implements FlutterPlugin, EventChannel.StreamHandle
     private int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
     private int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_8BIT;
     private int actualBitDepth;
-    private int BUFFER_SIZE = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
+    private int BUFFER_SIZE =  256;//AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
 
     // Runnable management
     private volatile boolean record = false;
@@ -181,7 +181,7 @@ public class MicStreamPlugin implements FlutterPlugin, EventChannel.StreamHandle
                 AUDIO_SOURCE = config.get(0);
             default:
                 try {
-                    BUFFER_SIZE = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
+                    BUFFER_SIZE = 256; // AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
                 } catch (Exception e) {
                     eventSink.error("-3", "Invalid AudioRecord parameters", e);
                 }
